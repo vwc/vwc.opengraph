@@ -21,4 +21,11 @@
       />
   <!-- -*- extra stuff goes here -*- -->
   
+  <browser:page
+      name="opengraph-settings"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".controlpanel.OpenGraphSettingsControlPanel"
+      permission="cmf.ManagePortal"
+      />
+  
 </configure>
