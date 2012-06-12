@@ -68,6 +68,15 @@ class OpenGraphViewlet(grok.Viewlet):
         return "%s/%s" % (portal_state.portal_url(), 'logo.jpg')
 
     def check_availability(self):
+        context = aq_inner(self.context)
+        settings = self.settings()
+        if settings.content_types:
+            context_type = context.portal_type()
+            if context_type in settings.content_types:
+                return True
+        return False
+
+    def has_app_id(self):
         settings = self.settings()
         if settings.app_id:
             try:
