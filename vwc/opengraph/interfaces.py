@@ -4,7 +4,7 @@ from zope.interface import Interface
 from vwc.opengraph import MessageFactory as _
 
 
-class IOpengraphSettings(Interface):
+class IOpenGraphSettings(Interface):
     """Opengraph default settings
     """
 
@@ -31,7 +31,7 @@ class IOpengraphSettings(Interface):
         description=_(u"Select a default opengraph object type to be added "
                       u"as og:type, e.g. article as a general default value"),
         required=True,
-        vocabulary="collective.opengraph.types",
+        vocabulary="vwc.opengraph.types",
         )
     content_types = schema.List(
         title=_(u'Content types'),
