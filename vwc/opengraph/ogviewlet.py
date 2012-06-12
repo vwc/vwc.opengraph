@@ -41,6 +41,9 @@ class OpenGraphViewlet(grok.Viewlet):
             items['og:title'] = context.Title()
             items['og:url'] = context.absolute_url()
             items['og:description'] = context.Description()
+        image_url = self.image_url
+        if image_url:
+            items['og:image'] = image_url
         items['og:site_name'] = portal.Title()
         items['fb:app_id'] = settings.app_id
         if settings.admins:
