@@ -19,6 +19,13 @@ class IOpengraphSettings(Interface):
         description=_(u"Enter optional facebook admin ID"),
         required=False
     )
+    default_image = schema.TextLine(
+        title=_(u"Fallback Image"),
+        description=_(u"Provide an url or relative path to a fallback image "
+                      u"that will be used if no content specific image is "
+                      u"available. Defaults to the site logo."),
+        required=False
+    )
     default_type = schema.Choice(
         title=_(u"Default opengraph object type"),
         description=_(u"Select a default opengraph object type to be added "
