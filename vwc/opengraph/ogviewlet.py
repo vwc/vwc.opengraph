@@ -10,5 +10,12 @@ class OpenGraphViewlet(grok.Viewlet):
     grok.name('vwc.opengraph.OpenGraphViewlet')
     grok.viewletmanager(IHtmlHead)
 
+    def update(self):
+        self.available = True
+
     def render(self):
         return 'OpenGraph Viewlet'
+
+    def og_properties(self):
+        items = {}
+        return items
