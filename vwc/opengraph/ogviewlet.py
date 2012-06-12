@@ -19,6 +19,7 @@ class OpenGraphViewlet(grok.Viewlet):
 
     def update(self):
         self.available = self.check_availability()
+        self.img_size = 'thumb'
 
     def render(self):
         return 'OpenGraph Viewlet'
@@ -43,8 +44,25 @@ class OpenGraphViewlet(grok.Viewlet):
         items['og:site_name'] = portal.Title()
         items['fb:app_id'] = settings.app_id
         if settings.admins:
-            items['og:admins'] = settings.admins
+            items['fb:admins'] = settings.admins
         return items
+
+    def image_url(self):
+        context = aq_inner(self.context)
+        portal_state = getMultiAdapter((self.context, self.request),
+                        name=u'plone_portal_state')
+        settings = self.settings()
+        obj_url = context.absolute_url()
+        if hasattr(context, 'getField'):
+            field = self.context.getField('image')
+            if field and field.get_size(context) > 0:
+                return u'%s/%s_%s' % (obj_url, field.getName(), self.img_size)
+        default_img = settings.default_image
+        if default_img and default_img.startswith('http://'):
+            return default_img
+        else:
+            return "%s/%s" % (portal_state.portal_url(), default_img)
+        return "%s/%s" % (portal_state.portal_url(), 'logo.jpg')
 
     def check_availability(self):
         settings = self.settings()
