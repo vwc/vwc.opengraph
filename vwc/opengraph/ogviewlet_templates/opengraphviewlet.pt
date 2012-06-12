@@ -1,6 +1,5 @@
 <tal:block tal:condition="viewlet/available">
     <meta tal:repeat="item viewlet/og_properties/items"
         tal:attributes="property python:item[0];
-            content python:item[1];"
-        property="" content="" />
+                        content python:item[1];" />
 </tal:block>
