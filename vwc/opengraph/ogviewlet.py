@@ -21,9 +21,6 @@ class OpenGraphViewlet(grok.Viewlet):
         self.available = self.check_availability()
         self.img_size = 'thumb'
 
-    def render(self):
-        return 'OpenGraph Viewlet'
-
     def og_properties(self):
         context = aq_inner(self.context)
         context_state = getMultiAdapter((context, self.request),
@@ -37,11 +34,18 @@ class OpenGraphViewlet(grok.Viewlet):
             items['og:url'] = portal.absolute_url()
             items['og:description'] = portal.Description()
         else:
-            items['og:type'] = settings.default_type or 'article'
+            default_type = settings.default_type
+            if default_type:
+                if isinstance(default_type[0], unicode):
+                    items['og:type'] = default_type[0]
+                else:
+                    items['og:type'] = unicode(default_type[0], 'utf-8')
+            else:
+                items['og:type'] = 'article'
             items['og:title'] = context.Title()
             items['og:url'] = context.absolute_url()
             items['og:description'] = context.Description()
-        image_url = self.image_url
+        image_url = self.image_url()
         if image_url:
             items['og:image'] = image_url
         items['og:site_name'] = portal.Title()
@@ -71,7 +75,7 @@ class OpenGraphViewlet(grok.Viewlet):
         context = aq_inner(self.context)
         settings = self.settings()
         if settings.content_types:
-            context_type = context.portal_type()
+            context_type = context.portal_type
             if context_type in settings.content_types:
                 return True
         return False

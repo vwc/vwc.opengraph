@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <registry>
-    <records interface="vwc.opengraph.interfaces.IOpengraphSettings" />
+    <records interface="vwc.opengraph.interfaces.IOpenGraphSettings" />
 
-    <records name="vwc.opengraph.openGraphTypes">
+    <record name="vwc.opengraph.openGraphTypes">
         <field type="plone.registry.field.Tuple">
             <title>Open Graph Types</title>
             <value_type type="plone.registry.field.TextLine" />
@@ -47,5 +47,5 @@
             <element>website</element>
             <element>article</element>
         </value>
-    </records>
+    </record>
 </registry>
