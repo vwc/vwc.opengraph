@@ -3,7 +3,7 @@ from Acquisition import aq_inner
 from zope.interface import Interface
 from zope.component import getUtility
 from zope.component import getMultiAdapter
-from zope.app.component.hooks import getSite
+from zope.component.hooks import getSite
 
 from plone.registry.interfaces import IRegistry
 from plone.app.layout.viewlets.interfaces import IHtmlHead
@@ -24,7 +24,7 @@ class OpenGraphViewlet(grok.Viewlet):
     def og_properties(self):
         context = aq_inner(self.context)
         context_state = getMultiAdapter((context, self.request),
-                            name=u'plone_context_state')
+                                        name=u'plone_context_state')
         portal = getSite()
         settings = self.settings()
         items = {}
@@ -57,7 +57,7 @@ class OpenGraphViewlet(grok.Viewlet):
     def image_url(self):
         context = aq_inner(self.context)
         portal_state = getMultiAdapter((self.context, self.request),
-                        name=u'plone_portal_state')
+                                       name=u'plone_portal_state')
         settings = self.settings()
         obj_url = context.absolute_url()
         if hasattr(context, 'getField'):
